@@ -84,17 +84,75 @@ If you don't already have Node.js and NPM, go install them. Then, in the folder 
 npm run bootstrap
 ```
 
-Then, to build the source, using npm:
+Then, to build the source for wechat miniprogram or minigame, using npm:
 
 ```sh
-npm run build
+npm run b:wechat
 ```
 
-The docs can be generated using npm:
+All the build details are in `rollup.wechat.config.js`, there are several adaptation manner:
 
-```sh
-npm run doc
+### API Polyfill 
+
+create a adapter for standard API, just like Alipay Miniprogram adaptation skills
+
+```js
+const adapterArray = [
+  "window",
+  "WebGLRenderingContext",
+  "WebGL2RenderingContext",
+  "document",
+  "Element",
+  "Event",
+  "EventTarget",
+  "HTMLCanvasElement",
+  "HTMLElement",
+  "HTMLMediaElement",
+  "HTMLVideoElement",
+  "Image",
+  "navigator",
+  "Node",
+  "requestAnimationFrame",
+  "cancelAnimationFrame",
+  "performance",
+];
 ```
+
+### Compiler Variable
+
+Used for compile-time logic replacement
+
+```js
+if (process.env.WECHAT) {
+  // logic in wechat platform
+}
+```
+
+Related files:
+
+* packages/loaders/src/BufferLoader.ts
+* packages/loader/src/gltf/Util.ts
+* packages/core/src/asset/request.ts
+
+### Module Replaced
+
+replace a module with another file, by custom rollup plugin
+
+```js
+const adapterRemap = {
+  './OrbitControl': './WechatOrbitControl',
+  './SystemInfo': './WechatSystemInfo',
+  '../SystemInfo': '../WechatSystemInfo',
+  './WebGLRenderer': './WechatWebGLRenderer',
+}
+```
+
+Related files:
+
+* packages/core/src/SystemInfo.ts
+* packages/rhi-webgl/src/WebGLRenderer.ts
+* packages/controls/src/OrbitControl.ts
+
 
 ## Links
 

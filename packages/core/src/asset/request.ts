@@ -88,6 +88,26 @@ function requestImage<T>(url: string, config: RequestConfig): AssetPromise<T> {
 }
 
 function requestRes<T>(url: string, config: RequestConfig): AssetPromise<T> {
+  // Adaptation for wechat
+  if (process.env.WECHAT) {
+    return new AssetPromise((resolve, reject, setProgress) => {
+      wx.request({
+        url,
+        method: config.method ?? "get",
+        timeout: config.timeout,
+        header: config.headers,
+        dataType: config.type === 'json' ? 'json' : undefined,
+        responseType: config.type === 'arraybuffer' ? config.type : 'text',
+        data: config.body,
+        success: (res) => {
+          resolve(res.data)
+        },
+        fail: (e) => {
+          reject(new Error(`request failed from: ${url}`));
+        }
+      })
+    });
+  }
   return new AssetPromise((resolve, reject, setProgress) => {
     const xhr = new XMLHttpRequest();
     xhr.timeout = config.timeout;

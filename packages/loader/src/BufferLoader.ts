@@ -10,6 +10,10 @@ class BufferLoader extends Loader<ArrayBuffer> {
     if (isBase64(url)) {
       return new AssetPromise((resolve) => {
         const base64Str = url.slice(13 + RegExp.$1.length);
+        // Adaptation for wechat
+        if (process.env.WECHAT) {
+          return resolve(wx.base64ToArrayBuffer(base64Str))
+        }
         const result = Uint8Array.from(atob(base64Str), (c) => c.charCodeAt(0));
         resolve(result.buffer);
       });

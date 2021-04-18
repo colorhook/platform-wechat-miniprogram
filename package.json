@@ -18,6 +18,7 @@
     "build-all": "cross-env BUILD_TYPE=ALL rollup -c",
     "b:umd": "cross-env BUILD_TYPE=UMD rollup -c",
     "b:miniprogram": "cross-env BUILD_TYPE=MINI rollup -c",
+    "b:wechat": "rm -rf dist && cross-env BUILD_TYPE=WECHAT rollup -c rollup.wechat.config.js",
     "b:all": "npm run b:types && npm run build-all",
     "clean": "lerna exec -- rm -rf dist && lerna clean",
     "changelog": "node tools/gen-changelog.js",
