@@ -1,25 +1,11 @@
-# Oasis Engine (Ant Graphics Engine)
+# platform-wechat-miniprogram
 
-<p align="center"><a href="https://oasis-engine.github.io" target="_blank" rel="noopener noreferrer"><img src="https://gw.alipayobjects.com/mdn/rms_d27172/afts/img/A*f1pVTpPvzA8AAAAAAAAAAAAAARQnAQ" alt="Oasis logo"></a></p>
-
-<a href="https://www.npmjs.com/package/oasis-engine"><img src="https://img.shields.io/npm/v/oasis-engine"/></a>
-![npm-size](https://img.shields.io/bundlephobia/minzip/oasis-engine)
-![npm-download](https://img.shields.io/npm/dm/oasis-engine)
-
-Oasis is a **web-first** and **mobile-first** high-performance real-time development platform. Use **component system design** and pursue ease of use and light weight. This repository is the core engine of Oasis. Developers can independently use and write Typescript scripts to develop projects using pure code.
-
-## Features
-
-- 🖥  &nbsp;**Platform** - Suppport HTML5 and Alipay miniprogram
-- 🔮  &nbsp;**Graphics** - Advanced 2D + 3D graphics engine
-- 🏃  &nbsp;**Animation** - Powerful animation system
-- 📑  &nbsp;**Scripts** - Use TypeScript to write logic efficiently
+Adaptation layer of WeChat miniprogram platform.
 
 ## Usage
 
 ```typescript
-// Create engine by passing in the HTMLCanvasElement id and get root entity.
-const engine = new WebGLEngine("canvas-id");
+const engine = new WebGLEngine(canvas_element);
 const canvas = engine.canvas;
 const rootEntity = engine.sceneManager.activeScene.createRootEntity("Root");
 canvas.width = window.innerWidth * SystemInfo.devicePixelRatio;
@@ -49,32 +35,6 @@ cubeRenderer.setMaterial(material);
 // Run engine.
 engine.run();
 ```
-
-## npm
-
-Oasis Engine are published on npm with full typing support. To install, use:
-
-```sh
-npm install oasis-engine
-```
-
-This will allow you to import Oasis Engine entirely using:
-
-```javascript
-import * as OASIS from "oasis-engine";
-```
-
-or individual classes using:
-
-```javascript
-import { Engine, Scene, Entity } from "oasis-engine";
-```
-
-## Contributing
-
-Everyone is welcome to join us! Whether you find a bug, have a great feature request or you fancy owning a task from the road map feel free to get in touch.
-
-Make sure to read the [Contributing Guide](.github/HOW_TO_CONTRIBUTE.md) before submitting changes.
 
 ## Build
 
@@ -162,4 +122,5 @@ Related files:
 - [API References](https://oasis-engine.github.io/0.3/api/globals.html)
 
 ## License 
+
 The Oasis Engine is released under the [MIT](https://opensource.org/licenses/MIT) license. See LICENSE file.
